@@ -17,23 +17,108 @@
         
         html,
         body {
-            background: #fff;
+            /* background: #C0C0C0;
+            color: #fff; */
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            /* color: #004953 !important; */
+        }
+        
+        #center {
+            height: 100vh;
+            width: 100%;
+            display: table;
+        }
+        
+        #lander {
+            width: 100%;
+            height: 100%;
+            display: table-cell;
+            vertical-align: middle;
+        }
+        
+        .grid {
+            height: 0;
         }
         
         .centered-text {
             text-align: center;
         }
     </style>
+
+    <script type="text/javascript">
+        function load() {
+            $('#about').hide();
+            $('#content').hide();
+            $('#links').hide();
+        }
+
+        function show(show) {
+            var pages = [
+                $('#home'),
+                $('#about'),
+                $('#content'),
+                $('#links')
+            ];
+
+            for (var i = 0; i < 4; i++) {
+                i == show ? pages[i].show() : pages[i].hide();
+            }
+        }
+    </script>
 </head>
 
-<body>
+<body onload="load();">
 
-    <div class="ui grid">
+    <div id="home" class="ui grid">
         <div class="four wide column">
         </div>
-        <div class="eight wide column">
+        <div id="center" class="eight wide column">
             <div id="lander">
                 <h1 class="ui header centered-text">Dirt Diggler's Shitty Sports Show</h1>
+                <p class="centered-text"><a href="#" onclick="show(1);">About</a>&emsp;|&emsp;<a href="#" onclick="show(2);">Content</a>&emsp;|&emsp;<a href="#" onclick="show(3);">Links</a></p>
+            </div>
+        </div>
+        <div class="four wide column">
+        </div>
+    </div>
+
+    <div id="about" class="ui grid">
+        <div class="four wide column">
+        </div>
+        <div id="center" class="eight wide column">
+            <div id="lander">
+                <h1 class="ui header centered-text">About the Shit</h1>
+            </div>
+        </div>
+        <div class="four wide column">
+        </div>
+    </div>
+
+    <div id="content" class="ui grid">
+        <div class="four wide column">
+        </div>
+        <div id="center" class="eight wide column">
+            <div id="lander">
+                <h1 class="ui header centered-text">Content</h1>
+            </div>
+        </div>
+        <div class="four wide column">
+        </div>
+    </div>
+
+    <div id="links" class="ui grid">
+        <div class="four wide column">
+        </div>
+        <div id="center" class="eight wide column">
+            <div id="lander">
+                <h1 class="ui header centered-text">Links</h1>
             </div>
         </div>
         <div class="four wide column">

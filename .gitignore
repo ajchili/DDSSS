@@ -1,4 +1,6 @@
 
-semantic/
+\.idea/
 
-node_modules/*
+target/*
+
+DDSSS\.iml

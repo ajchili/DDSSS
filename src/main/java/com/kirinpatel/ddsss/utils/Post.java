@@ -43,7 +43,7 @@ public class Post {
                 setHtml("<div class=\"mdl-cell mdl-cell--12-col\"><iframe src=\"https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FDirtDigglersSh1ttySportsShow%2Fposts%2F" + getFacebookPost() + "\" width=\"100%\" height=\"700\" style=\"border:none;width:100%;\" scrolling=\"no\" frameborder=\"0\" allowTransparency=\"true\" onload=\"resizeIframe(this)\"></iframe></div>");
                 break;
             case TWITTER:
-                setHtml("<div class=\"mdl-cell mdl-cell--6-col\"><blockquote class=\"twitter-tweet\" data-cards=\"hidden\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">Uploaded &quot;Dirt Diggler&#39;s Shitty Sports Show Season 2 - Why Your Division Sucks: AFC Wes...&quot; to <a href=\"https://twitter.com/mixcloud\">@mixcloud</a> <a href=\"https://t.co/cTmCg3jgDg\">https://t.co/cTmCg3jgDg</a> listen now!</p>&mdash; Dirt Diggler2823 (@DirtsDiggler) <a href=\"https://twitter.com/DirtsDiggler/status/" + getTwitterPost() + "\">August 13, 2017</a></blockquote></div>");
+                setHtml("<div class=\"mdl-cell mdl-cell--6-col\"><blockquote class=\"twitter-tweet\" data-cards=\"hidden\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">" + getTwitterPost() + "</blockquote></div>");
                 break;
             default:
                 break;
@@ -85,19 +85,37 @@ public class Post {
     }
 
     private String getTwitterPost() {
-        String post = "896544238804119552";
-        final String identifier = "stream";
+        String post = "";
+        final String[] identifiers = new String[] { "data-conversation-id=\"", "<div class=\"js-tweet-text-container\">", "<span class=\"metadata\">" };
         try {
+            String postID = "";
             Scanner s = new Scanner(new URLReader(new URL("https://twitter.com/DirtsDiggler")));
             while (s.hasNext()) {
                 String currentLine = s.nextLine();
-                if (currentLine.contains(identifier)) {
-
+                if (currentLine.contains(identifiers[0])) {
+                    postID = currentLine.substring(identifiers[0].length(), currentLine.length() - 1);
+                    break;
+                }
+            }
+            s = new Scanner(new URLReader(new URL("https://twitter.com/DirtsDiggler/status/" + postID)));
+            while (s.hasNext()) {
+                String currentLine = s.nextLine();
+                if (currentLine.contains(identifiers[1])) {
+                    currentLine = s.nextLine();
+                    post = currentLine.substring(currentLine.indexOf('>') + 1, currentLine.length());
+                }
+                if (currentLine.contains(identifiers[2])) {
+                    currentLine = s.nextLine();
+                    String date = currentLine.substring(currentLine.indexOf("- " + 1), currentLine.lastIndexOf('<'));
+                    post += " <a href=\"https://twitter.com/DirtsDiggler/status/" + postID + "\">" + date + "</a>";
+                    System.out.println(currentLine);
+                    break;
                 }
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        System.out.println(post);
         return post;
     }
 }

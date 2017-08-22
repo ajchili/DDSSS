@@ -38,7 +38,6 @@ Credit for template: https://getmdl.io/templates/index.html
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-green.min.css" />
-    <link rel="stylesheet" href="styles.css">
     <style>
         /**
          * Copyright 2015 Google Inc. All Rights Reserved.
@@ -278,26 +277,7 @@ Credit for template: https://getmdl.io/templates/index.html
         .mdl-demo .mdl-menu__container {
             z-index: 99;
         }
-
-        #view-source {
-            position: fixed;
-            display: block;
-            right: 0;
-            bottom: 0;
-            margin-right: 40px;
-            margin-bottom: 40px;
-            z-index: 900;
-        }
-
     </style>
-    <script>
-        // Credit: https://stackoverflow.com/a/9976309
-        function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-            obj.style.height = 700;
-            alert("testing");
-        }
-    </script>
 </head>
 <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -326,19 +306,12 @@ Credit for template: https://getmdl.io/templates/index.html
                 <div class="mdl-card mdl-cell mdl-cell--12-col">
                     <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                         <h4 class="mdl-cell mdl-cell--12-col">Recent posts</h4>
-                        <c:forEach items="${postContainer.posts}" var="Post" varStatus="i" begin="0">
-                            <form:input
-                                    path="postContainer.posts[${i.index}].html" id="html${i.index}"
-                                    readonly="true"/>
-                        </c:forEach>
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--12-col">
-                                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FDirtDigglersSh1ttySportsShow%2Fposts%2F506264903048330" style="border:none;" scrolling="no" frameborder="0" allowTransparency="true" onload="resizeIframe(this)"></iframe>
-                            </div>
-                            <div class="mdl-cell mdl-cell--6-col">
-                                <blockquote class="twitter-tweet" data-cards="hidden" data-lang="en">
-                                    <p lang="en" dir="ltr">Uploaded &quot;Dirt Diggler&#39;s Shitty Sports Show Season 2 - Why Your Division Sucks: AFC Wes...&quot; to <a href="https://twitter.com/mixcloud">@mixcloud</a> <a href="https://t.co/cTmCg3jgDg">https://t.co/cTmCg3jgDg</a> listen now!</p>&mdash; Dirt Diggler2823 (@DirtsDiggler) <a href="https://twitter.com/DirtsDiggler/status/896544238804119552">August 13, 2017</a></blockquote>
-                            </div>
+                            <c:forEach items="${postContainer.posts}" var="post" varStatus="i" begin="0">
+                                ${post.html}
+                            </c:forEach>
+                        </div>
+                        <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--6-col">
                                 <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
                                     <div style="padding:8px;">
@@ -390,8 +363,5 @@ Credit for template: https://getmdl.io/templates/index.html
 <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
-<script src="https://raw.githubusercontent.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.min.js"></script>
-<script src="https://raw.githubusercontent.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js"></script>
-<script>iFrameResize({autoResize:true})</script>
 </body>
 </html>

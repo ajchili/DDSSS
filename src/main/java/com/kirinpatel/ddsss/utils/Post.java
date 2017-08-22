@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class Post {
 
-    private final String facebookURL = "https://www.facebook.com/pg/DirtDigglersSh1ttySportsShow/posts/";
-    private final String twitterURL = "https://twitter.com/DirtsDiggler";
     private POST_TYPE type;
     private String html;
 
@@ -65,17 +63,19 @@ public class Post {
     }
 
     private String getFacebookPost() {
-        String post = "506264903048330";
-        final String identifier = "_4-u2 _4-u8";
+        String post = "";
+        final String[] identifiers = new String[] { "fwb", "/DirtDigglersSh1ttySportsShow/posts/" };
         try {
-            Scanner s = new Scanner(new URLReader(new URL(facebookURL)));
+            Scanner s = new Scanner(new URLReader(new URL("https://www.facebook.com/pg/DirtDigglersSh1ttySportsShow/posts/")));
             while (s.hasNext()) {
                 String currentLine = s.nextLine();
-                if (currentLine.contains(identifier)) {
-                    System.out.println("AAAAAsd\n" + currentLine);
-                    String[] a = new String[]{ currentLine.substring(0, currentLine.indexOf(identifier)), currentLine.substring(currentLine.indexOf(identifier))};
-                    System.out.println(a[0]);
-                    System.out.println(a[1]);
+                if (currentLine.contains(identifiers[0])) {
+                    currentLine = currentLine.substring(currentLine.indexOf(identifiers[0]));
+                    currentLine = currentLine.substring(currentLine.indexOf(identifiers[1]));
+                    currentLine = currentLine.substring(0, currentLine.indexOf('\"'));
+                    currentLine = currentLine.substring(currentLine.lastIndexOf("/") + 1);
+                    post = currentLine;
+                    break;
                 }
             }
         } catch (MalformedURLException e) {
@@ -88,7 +88,7 @@ public class Post {
         String post = "896544238804119552";
         final String identifier = "stream";
         try {
-            Scanner s = new Scanner(new URLReader(new URL(twitterURL)));
+            Scanner s = new Scanner(new URLReader(new URL("https://twitter.com/DirtsDiggler")));
             while (s.hasNext()) {
                 String currentLine = s.nextLine();
                 if (currentLine.contains(identifier)) {

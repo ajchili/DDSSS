@@ -310,8 +310,6 @@ Credit for template: https://getmdl.io/templates/index.html
                             <c:forEach items="${postContainer.posts}" var="post" varStatus="i" begin="0">
                                 ${post.html}
                             </c:forEach>
-                        </div>
-                        <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--6-col">
                                 <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
                                     <div style="padding:8px;">

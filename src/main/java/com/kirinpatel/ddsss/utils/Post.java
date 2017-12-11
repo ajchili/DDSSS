@@ -40,6 +40,7 @@ public class Post {
                 setHtml(PostPuller.getTwitterPost());
                 break;
             case INSTAGRAM:
+                setHtml(PostPuller.getInstagramPost());
                 break;
             case SOUNDCLOUD:
                 break;
